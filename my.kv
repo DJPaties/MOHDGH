@@ -1,0 +1,84 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+    ThirdWindow:
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Name:"
+            TextInput:
+                multiline: False
+            Label:
+                text: 'Email:'
+            TextInput:
+                multilinr: False
+        Button:
+            text: "Submit"
+            on_release:
+                app.root.current = 'second'
+                root.manager.transition.direction = "left"
+
+
+<SecondWindow>
+
+    name: "second"
+
+    GridLayout:
+        cols:2
+
+        Label:
+            text: "In order to continue type ~CONFIRM~"
+        TextInput:
+            id: conf
+            multiline: False
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+        Button:
+            pos_hint: {0.3, 0.5}
+            text: "Next"
+            on_release:
+                app.root.current = "third" if conf.text == "CONFIRM" else "second"
+                root.manager.transition.direction = "left"
+
+
+
+<ThirdWindow>
+
+    name: "third"
+    GridLayout:
+        cols: 1
+        Label:
+            text: "<<<APP STILL UNDER DEVELOPMENT>>>"
+
+        GridLayout:
+            cols: 3
+            Button:
+                text: "GO Back"
+                on_release:
+                    app.root.current = "second"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Home"
+                on_release:
+                    app.root.current = "main"
+
+            Button:
+                text: "Quit"
+                on_release: root.quit()
+
+
+
+
+
+
+
+
